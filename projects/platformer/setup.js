@@ -6,6 +6,8 @@ const maxSpeed = 8; // maximum horizontal speed, not vertical
 const playerJumpStrength = 12; // this is subtracted from the speedY each jump
 const projectileSpeed = 8; // the speed of projectiles
 
+
+
 /////////////////////////////////////////////////
 //////////ONLY CHANGE ABOVE THIS POINT///////////
 /////////////////////////////////////////////////
@@ -97,4 +99,7 @@ var collectableList = {
   kennedi: { image: "images/collectables/kennedi-head.png" },
   max: { image: "images/collectables/max-head.png" },
   steve: { image: "images/collectables/steve-head.png" },
+  paper: { image: "images/collectables/paper.jpg"},
+  poo: { image: "images/collectables/poo.webp"},
+  moist: { image: "images/collectables/moist.png"}, 
 };

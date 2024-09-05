@@ -3,7 +3,8 @@ body {
 }
 
 canvas {
-  background-color: lightblue;
+  background-image: url(images/skibidi.jpeg); 
+  background-size: cover;
   margin: 20px;
 }
 
