@@ -29,27 +29,54 @@ var background = function (window) {
         // ANIMATION VARIABLES HERE //////////////////////////////////////
         //////////////////////////////////////////////////////////////////
         // TODO (several):
-      
-      
+      var ship;
+      var comets = []; 
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
         function render() {
             background.removeAllChildren();
+        
 
             // TODO 1:
             // this currently fills the background with an obnoxious yellow;
             // you should modify both the height and color to suit your game
-            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'yellow');
+         //   var backgroundFill = draw.rect(canvasWidth, groundY,'purple');
+         var backgroundFill = draw.bitmap("img/Background-image.png")
+         backgroundFill.x = 0
+         backgroundFill.y = 0
+         backgroundFill.scaleX = 2.75;
+         backgroundFill.scaleY = 2.75
             background.addChild(backgroundFill);
             
             // TODO 2: - Add a moon and starfield
-            
-            
+            var planet = draw.bitmap("img/planet.png");
+            planet.x = 600;
+            planet.y = 100;
+            planet.scaleX = 1.0;
+            planet.scaleY = 1.0;
+            background.addChild(planet);
+
+            for (var i = 0; i < 10; i++){
+            var circle = draw.circle(10, "white", "LightGray", );
+            circle.x = canvasWidth * Math.random();
+            circle.y = groundY * Math.random();
+            background.addChild(circle);
+            }
             // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            
+            for (var i = 0; i < 2; ++i) {
+                var cometHeight = 300;
+                var comet = draw.bitmap("img/comet.png");
+                comet.x = 700 * i;
+                comet.y = 300 - cometHeight;
+                background.addChild(comet);
+                comets.push(comet);
+              }
             
             // TODO 3: Part 1 - Add a tree
-            
+            ship = draw.bitmap("img/spaceship.png")
+            ship.x = 450;
+            ship.y = 300;
+            background.addChild(ship)
             
         } // end of render function - DO NOT DELETE
         
@@ -63,10 +90,25 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 3: Part 2 - Move the tree!
-            
+            ship.x = ship.x - 2
+            if (ship.x < -200){
+                ship.x = canvasWidth;
+            }
             
             // TODO 4: Part 2 - Parallax
+        
+        
             
+            for (var i = 0; i < comets.length; i++) {
+                var eachComet = comets[i];
+                eachComet.x = eachComet.x - 0.4
+                if (eachComet.x < -200){
+                    eachComet.x = canvasWidth;
+                }
+                
+        
+                // code to do something with each element
+              }
 
         } // end of update function - DO NOT DELETE
         
