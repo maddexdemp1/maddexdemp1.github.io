@@ -42,6 +42,9 @@ var runLevels = function (window) {
     enemy.velocityX = -2;
     laser.x = -99;
     laser.y = -98;
+    if (enemy.x < -200){
+      enemy.x = canvasWidth; 
+    }
     enemy.addChild(laser);
     game.addGameItem(enemy);
  
@@ -54,27 +57,27 @@ var runLevels = function (window) {
       };
     
     }
-    
-  createEnemy(1500, groundY - 25)
-  createEnemy(1999, groundY - 120)
 
+  }
   function createReward(x, y){
-    var reward = createGameItem("reward", 25);
-    var star = draw.bitmap("img/star.png");
-    star.x = -99;
-    star.y = -98;
-    reward.addChild(star);
+    var reward = game.createGameItem("reward", 25);
     reward.x = x;
     reward.y = y;
-    reward.velocityX = -1;
-    reward.onProjectileCollision = function(){
-      reward.fadeOut(); 
-    }
+    var star = draw.bitmap("img/star.png");
+    reward.velocityX = -.5;
+    star.scaleX = .125
+    star.scaleY = .125
+    star.x = -200;
+    star.y = -98;
+    game.addGameItem(reward);
+    reward.addChild(star);
     reward.onPlayerCollision = function() {
       game.changeIntegrity(15);
+      game.increaseScore(200);
       reward.fadeOut();
-    game.addGameItem(reward);
-
+    }
+    reward.onProjectileCollision = function(){
+      reward.fadeOut(); 
     };
     
   }
@@ -96,7 +99,7 @@ var runLevels = function (window) {
     }
     startLevel();
   };
-};
+
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
 if (
