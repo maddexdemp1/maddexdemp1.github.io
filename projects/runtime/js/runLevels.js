@@ -14,7 +14,7 @@ var runLevels = function (window) {
     var levelData = window.opspark.levelData;
 
     // set this to true or false depending on if you want to see hitzones
-    game.setDebugMode();
+    game.setDebugMode(true);
 
     // TODOs 5 through 11 go here
     // BEGIN EDITING YOUR CODE HERE
@@ -31,9 +31,11 @@ var runLevels = function (window) {
     obstacleImage.y = -98 
     sawBladeHitZone.addChild(obstacleImage);
     }
+    
     createRock(1000, 550)
     createRock(2500, 460)
-    function createEnemy(x, y) {
+
+    function enemyMaker(x, y) {
       // all code from TODO 11 and 12
       var enemy = game.createGameItem("enemy", 25);
     enemy.x = x;
@@ -42,23 +44,22 @@ var runLevels = function (window) {
     enemy.velocityX = -2;
     laser.x = -99;
     laser.y = -98;
-    if (enemy.x < -200){
-      enemy.x = canvasWidth; 
-    }
     enemy.addChild(laser);
     game.addGameItem(enemy);
  
     enemy.onPlayerCollision = function () {
       game.changeIntegrity(-10)
+      enemy.fadeOut();
     };
     enemy.onProjectileCollision = function (){
       game.increaseScore(100);
       enemy.fadeOut();
       };
-    
     }
-
-  }
+  
+  enemyMaker(1200, groundY - 50);
+  
+   
   function createReward(x, y){
     var reward = game.createGameItem("reward", 25);
     reward.x = x;
@@ -67,7 +68,7 @@ var runLevels = function (window) {
     reward.velocityX = -.5;
     star.scaleX = .125
     star.scaleY = .125
-    star.x = -200;
+    star.x = -85;
     star.y = -98;
     game.addGameItem(reward);
     reward.addChild(star);
@@ -76,12 +77,31 @@ var runLevels = function (window) {
       game.increaseScore(200);
       reward.fadeOut();
     }
-    reward.onProjectileCollision = function(){
+    reward.onPlayerCollision = function(){
       reward.fadeOut(); 
+      game.increaseScore(300)
+    }
+    reward.onProjectileCollision = function(){
+      reward.fadeOut();
     };
     
   }
   createReward(1000, groundY - 25)
+  function createMarker(x, y){
+    var marker = createGameItem("marker", 25);
+    marker.x = x;
+    marker.y = y;
+    var end = draw.rect(50, 50, "blue");
+    marker.velocityX = -.1
+    end.x = -85;
+    end.y = -98
+    game.addGameItem(marker);
+    marker.addChild(end);
+    marker.onPlayerCollision = function(){
+      location.reload(); 
+    }
+  createMarker(1300, groundY - 35)
+  }
 
     function startLevel() {
       // TODO 13 goes below here
@@ -98,6 +118,7 @@ var runLevels = function (window) {
       }
     }
     startLevel();
+  };
   };
 
 
