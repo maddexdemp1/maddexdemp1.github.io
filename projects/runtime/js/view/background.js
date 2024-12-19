@@ -44,7 +44,7 @@ var background = function (window) {
          var backgroundFill = draw.bitmap("img/Background-image.png")
          backgroundFill.x = 0
          backgroundFill.y = 0
-         backgroundFill.scaleX = 2.75;
+         backgroundFill.scaleX = 2.90;
          backgroundFill.scaleY = 2.75
             background.addChild(backgroundFill);
             
